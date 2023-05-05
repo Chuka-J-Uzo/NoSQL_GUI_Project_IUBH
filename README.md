@@ -44,3 +44,22 @@ enter the docker shell for the mongo container, then just type'''
 ### Create your mongodb using this link  https://www.mongodb.com/basics/create-database:
 
         use Datastream_db
+        
+### To manipulate our fields, we need MongoDB Compass
+
+1. Download MongoDB Compass with: 
+'wget https://downloads.mongodb.com/compass/mongodb-compass_1.35.0_amd64.deb'
+
+
+2. Install MongoDB Compass:
+	sudo dpkg -i mongodb-compass_1.35.0_amd64.deb
+	
+If you get an error with the above installation, then use this to fix any missing dependencies:
+	sudo apt-get install -f
+	
+If it completes the fixing successfully, then proceed to retry: 
+	sudo dpkg -i mongodb-compass_1.35.0_amd64.deb
+
+
+3. Start MongoDB Compass:
+	mongodb-compass
