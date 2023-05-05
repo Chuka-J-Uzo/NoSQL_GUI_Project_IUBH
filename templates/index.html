@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NoSQL GUI Project</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="display.css">
+    
+  </head>
+  <body>
+    <h1>NoSQL GUI Project</h1>
+
+    <div style="display: flex;">
+      <!-- Left side column for forms -->
+      <div style="flex: 1;">
+        <!-- Rename Field form -->
+        <form action="/rename_field" method="post">
+          <label for="old_name">Old Field Name:</label>
+          <input type="text" id="old_name" name="old_name"><br><br>
+          <label for="new_name">New Field Name:</label>
+          <input type="text" id="new_name" name="new_name"><br><br>
+          <input type="submit" value="Rename Field">
+        </form>
+
+        <!-- Add Field form -->
+        <form action="/add_field" method="post">
+          <label for="field_name">Field Name:</label>
+          <input type="text" id="field_name" name="field_name"><br><br>
+          <label for="default_value">Default Value:</label>
+          <input type="text" id="default_value" name="default_value"><br><br>
+          <input type="submit" value="Add Field">
+        </form>
+
+        <!-- Merge Fields form -->
+        <form action="/merge_fields" method="post">
+          <label for="field1">Field 1:</label>
+          <input type="text" id="field1" name="field1"><br><br>
+          <label for="field2">Field 2:</label>
+          <input type="text" id="field2" name="field2"><br><br>
+          <input type="submit" value="Merge Fields">
+        </form>
+
+        <!-- Conditional Update form -->
+        <form action="/conditional_update" method="post">
+          <label for="field_name">Field Name:</label>
+          <input type="text" id="field_name" name="field_name"><br><br>
+          <label for="old_value">Old Value:</label>
+          <input type="text" id="old_value" name="old_value"><br><br>
+          <label for="new_value">New Value:</label>
+          <input type="text" id="new_value" name="new_value"><br><br>
+          <input type="submit" value="Conditional Update">
+        </form>
+      </div>
+
+      <!-- Right side column for display table -->
+<div style="flex: 2;">
+  <table>
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Item</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Category</th>
+              <th>Brand</th>
+              <th>Color</th>
+              <th>Size</th>
+              <th>Material</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for item in items %}
+          <tr>
+              <td>{{ item._id }}</td>
+              <td>{{ item.item }}</td>
+              <td>{{ item.price }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.category }}</td>
+              <td>{{ item.brand }}</td>
+              <td>{{ item.color }}</td>
+              <td>{{ item.size }}</td>
+              <td>{{ item.material }}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+
+      
+    </div>
+
+  </body>
+</html>

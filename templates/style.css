@@ -1,0 +1,26 @@
+/* Define styles for table */
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  /* Define styles for table header */
+  th {
+    background-color: orange;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  /* Define styles for table rows */
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Define styles for table data cells */
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  

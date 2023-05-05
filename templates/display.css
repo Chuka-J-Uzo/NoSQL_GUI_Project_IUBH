@@ -1,0 +1,9 @@
+/* Define styles for table header */
+th {
+  background-color: orange;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  color: white; /* added for white text */
+}
+

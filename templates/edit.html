@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NoSQL GUI Project - Edit Data</title>
+  </head>
+  <body>
+    <h1>NoSQL GUI Project - Edit Data</h1>
+    <form action="/update" method="post">
+      {% for key in keys %}
+        <label for="{{ key }}">{{ key }}:</label>
+        <input type="text" id="{{ key }}" name="{{ key }}" value="{{ doc[key] }}"><br><br>
+      {% endfor %}
+      <input type="hidden" name="_id" value="{{ doc['_id'] }}">
+      <input type="submit" value="Update">
+    </form>
+    <br>
+    <a href="/">Back</a>
+  </body>
+</html>
+
