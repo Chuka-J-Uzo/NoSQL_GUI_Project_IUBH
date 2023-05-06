@@ -30,7 +30,7 @@ OS
 
 '''Also you can just install all of them like this'''
        
-	  ```python -m pip install "pymongo[gssapi,aws,ocsp,snappy,zstd,encryption]"```
+	  ' python -m pip install "pymongo[gssapi,aws,ocsp,snappy,zstd,encryption]" '
 
 
 ### Docker install a Mongo image
