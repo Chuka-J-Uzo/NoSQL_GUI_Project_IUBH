@@ -2,3 +2,4 @@ flask
 pymongo
 pandas
 numpy
+"pymongo[gssapi,aws,ocsp,snappy,zstd,encryption]"

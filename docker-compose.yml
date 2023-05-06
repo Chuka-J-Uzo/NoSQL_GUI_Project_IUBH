@@ -1,0 +1,38 @@
+version: "3.6"
+services:
+  mongodb:
+    command:
+      - "mongod"
+    container_name: "mongodb"
+    entrypoint:
+      - "docker-entrypoint.sh"
+    environment:
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "GOSU_VERSION=1.16"
+      - "JSYAML_VERSION=3.13.1"
+      - "MONGO_PACKAGE=mongodb-org"
+      - "MONGO_REPO=repo.mongodb.org"
+      - "MONGO_MAJOR=6.0"
+      - "MONGO_VERSION=6.0.5"
+      - "HOME=/data/db"
+    hostname: "7cd3227f40f9"
+    image: "mongo"
+    ipc: "private"
+    labels:
+      org.opencontainers.image.ref.name: "ubuntu"
+      org.opencontainers.image.version: "22.04"
+    logging:
+      driver: "json-file"
+      options: {}
+    mac_address: ""
+    network_mode: "bridge"
+    ports:
+      - "27017:27017/tcp"
+    volumes:
+      - "b4e8c304e3e0410b43f1acdaf13668c8e835fef15fd4300066e52eb17be4aedf:/data/configdb"
+      - "3ac3575caa70f1b6b8bad599171a411b340ae490c932d1fcd2886268eb2a8800:/data/db"
+volumes:
+  3ac3575caa70f1b6b8bad599171a411b340ae490c932d1fcd2886268eb2a8800:
+    external: true
+  b4e8c304e3e0410b43f1acdaf13668c8e835fef15fd4300066e52eb17be4aedf:
+    external: true

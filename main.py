@@ -16,11 +16,18 @@ client = MongoClient(mongo_uri)
 db = client['Datastream_db']
 collection = db['Data_collection']
 
-
+# Our sample database
 store_data = [
-    {"item": "Item 1", "price": 14.6, "quantity": 50, "category": "Category 1", "brand": "Brand Gaeger", "color": "Red", "size": "Small", "material": "Cotton"},
-    {"item": "Item 2", "price": 70.2, "quantity": 30, "category": "Category 2", "brand": "Brand Umlaut", "color": "Blue", "size": "Medium", "material": "Polyester"},
-
+    {"item": "Item 1 ", "price": 14.6, "quantity": 50, "category": "Category 1", "brand": "Brand Gaeger", "color": "Red", "size": "Small", "material": "Cotton"},
+    {"item": "Item 2 🛍", "price": 70.2, "quantity": 30, "category": "Category 2", "brand": "Brand Umlaut", "color": "Blue", "size": "Medium", "material": "Polyester"},
+    {"item": "Item 3 🛍", "price": 130.7, "quantity": 20, "category": "Category 3", "brand": "Brand Caela", "color": "Green", "size": "Large", "material": "Silk"},
+    {"item": "Item 4 🛍" , "price": 43.5, "quantity": 15, "category": "Category 1", "brand": "Brand Devon", "color": "Yellow", "size": "Small", "material": "Wool"},
+    {"item": "Item 5 🛍", "price": 62.32, "quantity": 10, "category": "Category 2", "brand": "Brand Easel", "color": "Orange", "size": "Medium", "material": "Cotton"},
+    {"item": "Item 6", "price": 60.0, "quantity": 5, "category": "Category 3", "brand": "Brand Flourish", "color": "Purple", "size": "Large", "material": "Polyester"},
+    {"item": "Item 7", "price": 110.9, "quantity": 2, "category": "Category 1", "brand": "Brand Gourman", "color": "Black", "size": "Small", "material": "Leather"},
+    {"item": "Item 8", "price": 80.3, "quantity": 1, "category": "Category 2", "brand": "Brand Heissen", "color": "White", "size": "Medium", "material": "Nylon"},
+    {"item": "Item 9", "price": 90.05, "quantity": 0, "category": "Category 3", "brand": "Brand Texas", "color": "Brown", "size": "Large", "material": "Denim"},
+    {"item": "Item 10", "price": 10.60, "quantity": 0, "category": "Category 1", "brand": "Brand Johannsen", "color": "Gray", "size": "Small", "material": "Polyester"}
 ]
 
 # Insert the data into the collection
@@ -41,64 +48,10 @@ def index():
     return render_template('index.html', items=items)
 
 
-@app.route('/remove_field', methods=['POST'])
-def remove_field():
-    # Retrieve the field to be removed
-    field_name = request.form['field_name']
-
-    # Remove the field from all documents in the collection
-    collection.update_many({}, {'$unset': {field_name: 1}})
-
-    # Redirect to the display page
-    return redirect('/')
-
-
-@app.route('/rename_field', methods=['POST'])
-def rename_field():
-    # Retrieve the field to be renamed and the new name
-    old_name = request.form['old_name']
-    new_name = request.form['new_name']
-
-    # Rename the field in all documents in the collection
-    collection.update_many({}, {'$rename': {old_name: new_name}})
-
-    # Redirect to the display page
-    return redirect('/')
-
-
-@app.route('/add_field', methods=['POST'])
-def add_field():
-    # Retrieve the field name and default value
-    field_name = request.form['field_name']
-    default_value = request.form['default_value']
-
-    # Add the field to all documents in the collection
-    collection.update_many({}, {'$set': {field_name: default_value}})
-
-    # Redirect to the display page
-    return redirect('/')
-
-
-@app.route('/merge_fields', methods=['POST'])
-def merge_fields():
-    # Retrieve the names of the two fields to be merged and the name of the new merged field
-    field1 = request.form['field1']
-    field2 = request.form['field2']
-    new_field = request.form['new_field']
-
-    # Merge the two fields in all documents in the collection
-    collection.update_many({}, {'$set': {new_field: {'$concat': ['$' + field1, ' ', '$' + field2]}}})
-
-    # Remove the original fields from all documents in the collection
-    collection.update_many({}, {'$unset': {field1: 1, field2: 1}})
-
-    # Redirect to the display page
-    return redirect('/')
-
 @app.route('/display')
 def display():
     # Retrieve data from the database
-    store_data = collection.find()
+    store_data = list(db.Data_collection.find())
 
     # Convert the cursor to a list
     items = list(store_data)
@@ -108,8 +61,7 @@ def display():
         item['_id'] = str(item['_id'])
 
     # Render the data in the template
-    return render_template('display.html', items=items)
-
+    return render_template('index.html', items=items)
 
 
 if __name__ == '__main__':
