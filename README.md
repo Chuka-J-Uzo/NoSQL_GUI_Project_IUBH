@@ -15,18 +15,22 @@ OS
        sudo apt-get install libkrb5-dev
        
 '''GSSAPI authentication requires pykerberos on Unix or WinKerberos on Windows. The correct dependency can be installed automatically along with PyMongo:'''
-       python3 -m pip install "pymongo[gssapi]"
+       
+	   ```python3 -m pip install "pymongo[gssapi]"```
        
 '''MONGODB-AWS authentication requires pymongo-auth-aws:'''
-       python3 -m pip install "pymongo[aws]" 
+       
+	   ```python3 -m pip install "pymongo[aws]"```
        
 '''OCSP (Online Certificate Status Protocol) requires PyOpenSSL, requests, service_identity and may require certifi:'''       
-       python3 -m pip install "pymongo[ocsp]"
+       
+	   ```python3 -m pip install "pymongo[ocsp]"```
 
 
 
 '''Also you can just install all of them like this'''
-       python -m pip install "pymongo[gssapi,aws,ocsp,snappy,zstd,encryption]"
+       
+	  ```python -m pip install "pymongo[gssapi,aws,ocsp,snappy,zstd,encryption]"```
 
 
 ### Docker install a Mongo image
