@@ -1,23 +1,40 @@
-### About the Application
+## About this Application
 
 This app is a solution for a small apparel retail store that needs to update prices of displayed items in response to the highly competitive pricing environment in its neighborhood.
 
-MongoDB is the choice for this application because it is a highly scalable, document-oriented NoSQL database that can handle a large volume of data and provides flexible data modeling. It also allows for easy integration with other technologies, making it an ideal choice for modern web applications.
+`MongoDB` is the choice for this application because it is a highly scalable, document-oriented NoSQL database that can handle a large volume of data and provides flexible data modeling. It also allows for easy integration with other technologies, making it an ideal choice for modern web applications.
 
-For quick data modelling and alterations to our database, we chose MongoDB-Compass. MongoDB-Compass is a GUI tool that provides a visual interface for managing and interacting with MongoDB databases, making it easier for users to navigate and work with the data.
+For quick data modelling and alterations to our database, we chose `MongoDB-Compass`. `MongoDB-Compass` is a GUI tool that provides a visual interface for managing and interacting with `MongoDB` databases, making it easier for users to navigate and work with the data.
 
-We have also run this database on Docker in consideration of its advantages. Running MongoDB in a Docker container allows for easy deployment and management of the database, as well as providing a consistent and reproducible environment for the application. Containerization allows for better resource management and easier "horizontal" scaling of the application as the business grows.
+We have also run this database on Docker in consideration of its advantages. Running `MongoDB` in a Docker container allows for easy deployment and management of the database, as well as providing a consistent and reproducible environment for the application. Containerization allows for better resource management and easier "horizontal" scaling of the application as the business grows.
 
 The use of containerization also provides benefits such as improved portability, version control, and isolation, making it easier to maintain and deploy the application across different environments. 
 
-Using MongoDB, MongoDB Compass, and Docker provides a modern and scalable solution for the apparel retail store's pricing update needs.
+Using `MongoDB`, `MongoDB Compass`, and Docker provides a modern and scalable solution for the apparel retail store's pricing update needs.
 
 
-# MongoDB document databases provide high availability and easy scalability.
+`MongoDB` document databases provide high availability and easy scalability.
 
-Our python version is '''3.10.6'''
+### Our device Details
 
-Operating system is 'Ubuntu 22.04 LTS'
+Our python version is `3.10.6`
+
+Operating system is `Ubuntu 22.04 LTS`
+
+### Files contained in our App directory
+
+`main.py`: This is the main file for your Flask application. It contains the code for defining our Flask routes and handling HTTP requests and responses.
+
+`README.md`: This is a markdown file that provides documentation and instructions on how to use the application.
+
+`templates/`: This is a directory that contains the HTML templates for this application.
+
+`docker-compose.yml`: This is a YAML config file that defines the MongoDB database container that should be run in our Docker environment.
+
+`queries.md`: This is a markdown file that contains sample queries that can be run on our MongoDB database.
+
+`requirements.txt`: This is a file that lists the Python packages that are required for our application to run. It contains some dependencies that pymongo requires to run.
+## How to Use this Application:
 
 ### Install python client API for Mongo as well as Flask API
 	pip install pymongo
@@ -50,7 +67,7 @@ Operating system is 'Ubuntu 22.04 LTS'
 
 ### Docker config for MongoDB
 
-Included in the main directory is our 'docker-compose.yml' file for those who prefer to build it that way.
+Included in the main directory is our `docker-compose.yml` file for those who prefer to build it that way.
 
 The mongoDB docker image version looks like this:
       - "GOSU_VERSION=1.16"
@@ -62,7 +79,7 @@ The mongoDB docker image version looks like this:
       - "HOME=/data/db"
 
 
-In our 'docker-compose.yml' file, you will notice that we mounted the Database container on a volume to achieve "persistence" of the data to be written and manipulated on our container. 
+In our `docker-compose.yml` file, you will notice that we mounted the Database container on a volume to achieve "persistence" of the data to be written and manipulated on our container. 
 
 Our volume details look like this:
 	volumes:
