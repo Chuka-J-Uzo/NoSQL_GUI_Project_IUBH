@@ -174,3 +174,16 @@ If it completes the fixing successfully, then proceed to retry:
 	    }
 	  }
 	])
+
+
+
+### Other commands that can be run in the input box
+
+To print and retrieve the contents of the entire document, use:
+		collection.find({})
+
+To retrieve all documents in the `Data_collection` collection and sort them by the "price" field in ascending order, using this command will help. for example, It will sort the documents in ascending order of the "price" field. That means the lowest prices will appear first, followed by higher prices.         
+		collection.find().sort("price") 
+
+But If you want to sort the documents in descending order of the "price" field, we can use:		
+		collection.find().sort("price", -1)
