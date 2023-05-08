@@ -1,10 +1,12 @@
 ## About this Application
 
-This app is a solution for a small apparel retail store that needs to update prices of displayed items in response to the highly competitive pricing environment in its neighborhood.
+This app is a solution for a small apparel retail store that needs to update prices of displayed items in response to the highly competitive pricing environment in its neighborhood. It works by creating a dummy data and pushing it into our `MongoDB` database for further manipulations.
 
 `MongoDB` is the choice for this application because it is a highly scalable, document-oriented NoSQL database that can handle a large volume of data and provides flexible data modeling. It also allows for easy integration with other technologies, making it an ideal choice for modern web applications.
 
 For quick data modelling and alterations to our database, we chose `MongoDB-Compass`. `MongoDB-Compass` is a GUI tool that provides a visual interface for managing and interacting with `MongoDB` databases, making it easier for users to navigate and work with the data.
+
+We also use TKinter GUI to link our python code to our NoSQL DB (MongoDB in this case). With this interface, entering the appropriate MongoDB queries below this document will allow you manipulate the actual database.
 
 We have also run this database on Docker in consideration of its advantages. Running `MongoDB` in a Docker container allows for easy deployment and management of the database, as well as providing a consistent and reproducible environment for the application. Containerization allows for better resource management and easier "horizontal" scaling of the application as the business grows.
 
@@ -23,15 +25,11 @@ Operating system is `Ubuntu 22.04 LTS`
 
 ### Files contained in our App directory
 
-`main.py`: This is the main file for your Flask application. It contains the code for defining our Flask routes and handling HTTP requests and responses.
+`Retail_runner.py`: This is the main file that contains the code that allows us run Tkinter GUI and use Mongo Interactively in it.
 
 `README.md`: This is a markdown file that provides documentation and instructions on how to use the application.
 
-`templates/`: This is a directory that contains the HTML templates for this application.
-
 `docker-compose.yml`: This is a YAML config file that defines the MongoDB database container that should be run in our Docker environment.
-
-`queries.md`: This is a markdown file that contains sample queries that can be run on our MongoDB database.
 
 `requirements.txt`: This is a file that lists the Python packages that are required for our application to run. It contains some dependencies that pymongo requires to run.
 ## How to Use this Application:
@@ -39,6 +37,7 @@ Operating system is `Ubuntu 22.04 LTS`
 ### Install python client API for Mongo as well as Flask API
 	pip install pymongo
 	pip install flask
+	pip install python3-tk
 
 ### Install dependencies
        sudo apt-get install libkrb5-dev
@@ -124,57 +123,6 @@ If it completes the fixing successfully, then proceed to retry:
 
 5. Next, use the following commands to adjust or manipulate the fields accordingly:
 
-### Delete a collection
-        db.Data_collection.deleteMany({})
-	
-### Merge two fields
-        db.Data_collection.updateMany({}, { $set: { merged_field: { $concat: ["$price", " ", "$quantity"] } } }, { multi: true })
-### Rename a fields       
-        db.Data_collection.updateOne({item: "Item 1"}, {$rename: {"category": "Category 1"}})
-### Remove a field       
-        db.Data_collection.updateOne({item: "Item 1"}, {$unset: {size: ""}})
-### Add a field        
-        db.Data_collection.updateOne({item: "Item 1"}, {$set: {"Size": "Medium"}})
-        
-### Do a conditional update for several fields
-	db.Data_collection.updateMany(
-  { category: "Category 1" },
-  {
-    $set: {
-      price: { $multiply: ["$price", 1.1] },
-      quantity: { $subtract: ["$quantity", 10] },
-      brand: "New Brand"
-    }
-  }
-)
-
-     
-### Add a field to a particular position
-	       db.Data_collection.aggregate([
-	  {
-	    $match: { item: "Item 1" }
-	  },
-	  {
-	    $addFields: {
-	      Size: "Medium"
-	    }
-	  },
-	  {
-	    $project: {
-	      _id: 0,
-	      item: 1,
-	      price: 1,
-	      quantity: 1,
-	      category: 1,
-	      brand: 1,
-	      color: 1,
-	      Size: 1,
-	      material: 1
-	      
-	    }
-	  }
-	])
-
 
 
 ### Other commands that can be run in the input box
@@ -187,3 +135,19 @@ To retrieve all documents in the `Data_collection` collection and sort them by t
 
 But If you want to sort the documents in descending order of the "price" field, we can use:		
 		collection.find().sort("price", -1)
+
+### To Delete the entire content of a collection, use:
+		collection.delete_many({})
+
+### To Merge two fields
+		collection.update_many({}, { "$set": { "merged_field": { "$concat": ["$price", "60.98", "$quantity"] } } })
+
+### To Rename a field in the entire collection:
+		collection.update_many({'category': {'$regex': 'Category 1'}}, {'$set': {'category': 'Category A'}})
+
+### To Remove an entire field, use this:
+		collection.update_many({}, {'$unset': {'size': ''}})
+
+### To Add a new field, use this:
+
+		collection.update_many({}, {'$set': {'size': 'Large'}})

@@ -4,6 +4,7 @@ from tkinter import *
 from tkinter import simpledialog
 from pymongo import MongoClient
 from pymongo.cursor import Cursor
+from pymongo.server_api import ServerApi
 import pprint
 import io
 import re
@@ -11,12 +12,15 @@ import sys
 
 
 root = Tk()
+root.title("Retail Inventory App - NoSQL DB - IUBH")
+root.bell()
 
 # Our sample database
 store_data = [
     {"item": "Item 1 ", "price": 14.6, "quantity": 50, "category": "Category 1", "brand": "Brand Gaeger", "color": "Red", "size": "Small", "material": "Cotton"},
     {"item": "Item 2 🛍", "price": 70.2, "quantity": 30, "category": "Category 2", "brand": "Brand Umlaut", "color": "Blue", "size": "Medium", "material": "Polyester"}
 ]
+
 
 # Connect to MongoDB
 mongo_uri = 'mongodb://localhost:27017/'
@@ -25,8 +29,21 @@ db = client['Datastream_db']
 collection = db['Data_collection']
 
 
+# Set the Stable API version when creating a new client
+client = MongoClient(mongo_uri, server_api=ServerApi('1'))
+                          
+# Send a ping to confirm a successful connection
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
+
+
+
 # Insert the data into the collection
 collection.insert_many(store_data)
+
 
 
 # Define a list of auto-completion options
@@ -39,6 +56,8 @@ autocomplete_options = [
     'collection.update_many',
     'collection.delete_one',
     'collection.delete_many',
+    'collection.updateOne',
+    'db.collection.updateOne',    
     'db.command'
 ]
 
@@ -69,9 +88,12 @@ def execute_code(event=None):
                 result = [doc for doc in result]
                 for doc in result:
                     pprint.pprint(doc, stream=buf)
+            else:
+                pprint.pprint(result, stream=buf)
 
         # Display the results in the display_box
         display_box.insert(END, buf.getvalue())
+        display_box.insert(END, "Code executed successfully!\n")
 
     except Exception as e:
         # Display any errors in the display_box
